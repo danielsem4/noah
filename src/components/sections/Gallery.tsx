@@ -1,166 +1,229 @@
 import { motion } from 'framer-motion'
-import { Camera } from 'lucide-react'
 
-// Placeholder gradient images since actual assets may not be present
-// Each entry has a label and a gradient for visual variety
 const galleryItems = [
   {
     id: 1,
     label: 'מנות ראשונות',
-    gradient: 'from-[#8B1A1A] via-[#C8971A]/30 to-[#2E2010]',
+    sub: 'ממרחים וסלטים',
     src: new URL('../../assets/carousel/1.svg', import.meta.url).href,
+    fallbackBg: 'linear-gradient(160deg, #82583B 0%, #AD652E 60%, #5F3C20 100%)',
     emoji: '🥗',
   },
   {
     id: 2,
     label: 'גריל טרי',
-    gradient: 'from-[#5C0F0F] via-[#8B1A1A]/40 to-[#251A0E]',
+    sub: 'מהאש אל השולחן',
     src: new URL('../../assets/carousel/2.svg', import.meta.url).href,
+    fallbackBg: 'linear-gradient(160deg, #5F3C20 0%, #AD652E 60%, #82583B 100%)',
     emoji: '🔥',
   },
   {
     id: 3,
     label: 'מנות עיקריות',
-    gradient: 'from-[#9A6F10] via-[#C8971A]/20 to-[#1A1108]',
+    sub: 'בשר, עוף ודגים',
     src: new URL('../../assets/carousel/3.svg', import.meta.url).href,
+    fallbackBg: 'linear-gradient(160deg, #AD652E 0%, #5F3C20 60%, #82583B 100%)',
     emoji: '🍖',
   },
   {
     id: 4,
     label: 'קינוחים',
-    gradient: 'from-[#2E2010] via-[#C8971A]/15 to-[#8B1A1A]/30',
+    sub: 'המתקת הסיום',
     src: new URL('../../assets/carousel/4.svg', import.meta.url).href,
+    fallbackBg: 'linear-gradient(160deg, #82583B 0%, #5F3C20 60%, #AD652E 100%)',
     emoji: '🍮',
   },
   {
     id: 5,
-    label: 'אווירת המסעדה',
-    gradient: 'from-[#1A1108] via-[#8B1A1A]/20 to-[#C8971A]/20',
+    label: 'אווירה',
+    sub: 'חמימות וקסם',
     src: new URL('../../assets/carousel/5.svg', import.meta.url).href,
+    fallbackBg: 'linear-gradient(160deg, #5F3C20 0%, #82583B 60%, #AD652E 100%)',
     emoji: '✨',
   },
 ]
 
-function GalleryCard({
+/** Individual arch-shaped gallery card */
+function ArchCard({
   item,
   index,
+  featured = false,
 }: {
   item: (typeof galleryItems)[0]
   index: number
+  featured?: boolean
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
+    <motion.article
+      initial={{ opacity: 0, y: 36 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.25, 0.4, 0.25, 1] }}
-      className="group relative overflow-hidden rounded-2xl bg-[#1A1108] border border-[#3D2E1A] cursor-pointer"
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.6, delay: index * 0.09, ease: 'easeOut' }}
+      className="group flex flex-col items-center"
     >
-      {/* Image with fallback gradient */}
-      <div className="relative overflow-hidden aspect-square sm:aspect-[4/3]">
+      {/* ── Arch image container ── */}
+      <div
+        className={`relative overflow-hidden w-full transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-[#82583B]/25 group-hover:-translate-y-2 ${
+          featured ? 'max-w-[240px] sm:max-w-[280px]' : 'max-w-[200px] sm:max-w-[220px]'
+        }`}
+        style={{
+          /* Classic arch: semicircle top, flat-ish bottom */
+          borderTopLeftRadius: '9999px',
+          borderTopRightRadius: '9999px',
+          borderBottomLeftRadius: '14px',
+          borderBottomRightRadius: '14px',
+          aspectRatio: featured ? '3/4' : '3/4',
+          border: '2px solid rgba(130,88,59,0.25)',
+        }}
+      >
         <img
           src={item.src}
           alt={item.label}
           loading="lazy"
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
           onError={(e) => {
-            // Hide broken image and show gradient fallback
-            const target = e.currentTarget as HTMLImageElement
-            target.style.display = 'none'
-            const fallback = target.nextElementSibling as HTMLElement
+            const img = e.currentTarget as HTMLImageElement
+            img.style.display = 'none'
+            const fallback = img.nextElementSibling as HTMLElement
             if (fallback) fallback.style.display = 'flex'
           }}
         />
         {/* Gradient fallback */}
         <div
-          className={`hidden w-full h-full absolute inset-0 bg-gradient-to-br ${item.gradient} items-center justify-center`}
+          className="hidden w-full h-full absolute inset-0 items-center justify-center"
+          style={{ background: item.fallbackBg }}
         >
-          <span className="text-5xl sm:text-6xl select-none">{item.emoji}</span>
+          <span className="text-4xl sm:text-5xl select-none drop-shadow-sm">{item.emoji}</span>
         </div>
 
-        {/* Overlay on hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0F0A07]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        {/* Hover overlay — softened amber tint */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#5F3C20]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+
+        {/* Hover label inside arch */}
+        <div className="absolute bottom-4 left-0 right-0 flex justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+          <span
+            className="bg-[#E4E1D8]/90 text-[#5F3C20] text-xs font-bold px-3 py-1 rounded-full tracking-wide backdrop-blur-sm"
+            style={{ fontFamily: "'Assistant', sans-serif" }}
+          >
+            {item.sub}
+          </span>
+        </div>
       </div>
 
-      {/* Label */}
-      <div className="p-4">
-        <p className="text-[#F5EDD6] font-semibold text-sm">{item.label}</p>
-        <div className="mt-1.5 h-0.5 w-0 bg-gradient-to-l from-[#C8971A] to-[#E4B84A] transition-all duration-300 group-hover:w-full rounded-full" />
+      {/* ── Card label below the arch ── */}
+      <div className="mt-4 text-center">
+        <p
+          className="text-[#000000] font-semibold text-base"
+          style={{ fontFamily: "'Frank Ruhl Libre', serif" }}
+        >
+          {item.label}
+        </p>
+        {/* Thin amber underline that expands on hover */}
+        <div className="mt-1.5 h-[1.5px] w-0 bg-[#AD652E] mx-auto rounded-full transition-all duration-400 group-hover:w-10" />
       </div>
-
-      {/* Corner accent */}
-      <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/40 backdrop-blur-sm border border-[#C8971A]/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <Camera className="w-3.5 h-3.5 text-[#C8971A]" />
-      </div>
-    </motion.div>
+    </motion.article>
   )
 }
 
 export default function Gallery() {
+  const featured = galleryItems[0]
+  const rest     = galleryItems.slice(1)
+
   return (
     <section
       id="gallery"
-      className="relative py-24 sm:py-32 bg-[#0F0A07] overflow-hidden"
+      className="relative py-24 sm:py-32 bg-[#E4E1D8] overflow-hidden"
     >
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 left-0 h-px bg-gradient-to-r from-transparent via-[#3D2E1A] to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0A0703] via-[#0F0A07] to-[#0A0703]" />
-      <div className="absolute top-1/2 right-0 w-64 h-64 rounded-full bg-[#8B1A1A]/6 blur-[80px] pointer-events-none" />
+      {/* Subtle warm glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 right-8 w-72 h-72 rounded-full bg-[#AD652E]/5 blur-[70px]" />
+        <div className="absolute bottom-20 left-10 w-56 h-56 rounded-full bg-[#82583B]/5 blur-[60px]" />
+      </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
 
-        {/* Section header */}
+        {/* ── Section header ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-14"
+          transition={{ duration: 0.55 }}
+          className="text-center mb-16 sm:mb-20"
         >
-          <span className="inline-flex items-center gap-2 bg-[#C8971A]/10 border border-[#C8971A]/30 rounded-full px-4 py-1.5 text-[#C8971A] text-sm font-medium mb-4">
-            <Camera className="w-3.5 h-3.5" />
-            גלריה
+          <span
+            className="inline-flex items-center gap-2 border border-[#AD652E]/40 rounded-full px-4 py-1.5 text-[#AD652E] text-xs font-semibold tracking-widest uppercase mb-5"
+            style={{ fontFamily: "'Assistant', sans-serif" }}
+          >
+            ✦ &nbsp;גלריה&nbsp; ✦
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#F5EDD6] mb-4">
+          <h2
+            className="text-[#000000] mb-4"
+            style={{
+              fontFamily: "'Frank Ruhl Libre', serif",
+              fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+              fontWeight: 700,
+            }}
+          >
             הטעמים{' '}
-            <span
-              style={{
-                background: 'linear-gradient(135deg, #C8971A 0%, #E4B84A 50%, #C8971A 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              שלנו
-            </span>
+            <span style={{ color: '#AD652E' }}>שלנו</span>
           </h2>
-          <p className="text-[#8A7560] text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+          <p
+            className="text-[#82583B] text-base sm:text-lg max-w-xl mx-auto leading-relaxed"
+            style={{ fontFamily: "'Assistant', sans-serif" }}
+          >
             כל צלחת היא יצירת אמנות. גלו את עולם הטעמים שיצרנו עבורכם.
           </p>
           <div className="section-divider mt-6" />
         </motion.div>
 
-        {/* Grid — masonry-like layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-          {galleryItems.map((item, index) => (
-            <div
-              key={item.id}
-              className={
-                /* Make item 1 and 4 span 2 columns on lg for visual variety */
-                index === 0
-                  ? 'lg:col-span-2 lg:row-span-1'
-                  : index === 3
-                    ? 'sm:col-span-2 lg:col-span-1'
-                    : ''
-              }
-            >
-              <GalleryCard item={item} index={index} />
-            </div>
-          ))}
-        </div>
-      </div>
+        {/* ── Arch-gallery layout ──
+            Desktop: featured arch (larger) centred, others flanking
+            Mobile: 2-column grid of arches
+        ── */}
+        <div className="flex flex-col items-center gap-12">
 
-      <div className="absolute bottom-0 right-0 left-0 h-px bg-gradient-to-r from-transparent via-[#3D2E1A] to-transparent" />
+          {/* Top row: featured + 2 flanking arches on desktop */}
+          <div className="w-full flex flex-wrap justify-center gap-8 sm:gap-12 lg:gap-16 items-end">
+            {/* Left flanker (index 1) */}
+            <div className="hidden sm:block">
+              <ArchCard item={rest[0]} index={1} />
+            </div>
+
+            {/* Featured (larger) */}
+            <ArchCard item={featured} index={0} featured />
+
+            {/* Right flanker (index 2) */}
+            <div className="hidden sm:block">
+              <ArchCard item={rest[1]} index={2} />
+            </div>
+
+            {/* Mobile: show index 1 and 2 in row */}
+            <div className="sm:hidden flex gap-6">
+              <ArchCard item={rest[0]} index={1} />
+              <ArchCard item={rest[1]} index={2} />
+            </div>
+          </div>
+
+          {/* Bottom row: remaining 2 arches */}
+          <div className="flex flex-wrap justify-center gap-8 sm:gap-12 lg:gap-20">
+            <ArchCard item={rest[2]} index={3} />
+            <ArchCard item={rest[3]} index={4} />
+          </div>
+        </div>
+
+        {/* ── Decorative bottom ornament ── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex items-center justify-center gap-3 mt-16"
+        >
+          <div className="h-px w-20 bg-gradient-to-r from-transparent to-[#82583B]/30" />
+          <span className="text-[#AD652E]/50 text-lg select-none">✦</span>
+          <div className="h-px w-20 bg-gradient-to-l from-transparent to-[#82583B]/30" />
+        </motion.div>
+      </div>
     </section>
   )
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { UtensilsCrossed, ChevronDown } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import {
   Dialog,
   DialogContent,
@@ -22,72 +22,93 @@ interface MenuCategory {
   items: MenuItem[]
 }
 
-function MenuItemCard({ item }: { item: MenuItem }) {
+/* ─── Single menu item row ────────────────────────────────────────────── */
+function MenuItemRow({ item }: { item: MenuItem }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -10 }}
-      className="group flex items-start justify-between gap-4 py-4 border-b border-[#3D2E1A]/60 last:border-0 hover:bg-[#251A0E]/50 -mx-3 px-3 rounded-lg transition-colors duration-200"
-    >
+    <div className="group flex items-start justify-between gap-4 py-3.5 border-b border-[#7A5030]/40 last:border-0 hover:bg-[#7A5030]/20 -mx-3 px-3 rounded-lg transition-colors duration-150">
       <div className="flex-1 min-w-0">
-        <h4 className="text-[#F5EDD6] font-semibold text-sm sm:text-base mb-0.5">
+        <p
+          className="text-[#E4E1D8] font-semibold text-sm sm:text-[15px] mb-0.5 leading-snug"
+          style={{ fontFamily: "'Frank Ruhl Libre', serif" }}
+        >
           {item.name}
-        </h4>
+        </p>
         {item.description && (
-          <p className="text-[#8A7560] text-xs sm:text-sm leading-relaxed">
+          <p
+            className="text-[#E4E1D8]/55 text-xs sm:text-sm leading-relaxed"
+            style={{ fontFamily: "'Assistant', sans-serif" }}
+          >
             {item.description}
           </p>
         )}
         {item.notes && (
-          <p className="text-[#C8971A]/70 text-xs mt-1 italic">* {item.notes}</p>
+          <p
+            className="text-[#AD652E]/70 text-xs mt-1 italic"
+            style={{ fontFamily: "'Assistant', sans-serif" }}
+          >
+            ✦ {item.notes}
+          </p>
         )}
       </div>
-      <div className="flex-shrink-0 text-left">
-        <span className="text-[#C8971A] font-bold text-base sm:text-lg ltr">
+      {/* Price tag */}
+      <div className="shrink-0 mt-0.5">
+        <span
+          className="text-[#AD652E] font-bold text-base sm:text-lg ltr"
+          style={{ fontFamily: "'Assistant', sans-serif" }}
+        >
           ₪{item.price}
         </span>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
-function CategorySection({ category }: { category: MenuCategory }) {
-  const [isOpen, setIsOpen] = useState(true)
+/* ─── Collapsible category section ───────────────────────────────────── */
+function CategorySection({ category, defaultOpen = false }: { category: MenuCategory; defaultOpen?: boolean }) {
+  const [open, setOpen] = useState(defaultOpen)
 
   return (
-    <div className="mb-6">
+    <div className="mb-4">
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between gap-3 py-3 px-4 rounded-xl bg-gradient-to-l from-[#8B1A1A]/20 via-[#251A0E] to-[#251A0E] border border-[#3D2E1A] hover:border-[#C8971A]/40 transition-all duration-200 group cursor-pointer"
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between gap-3 py-3 px-4 rounded-xl bg-[#7A5030]/30 hover:bg-[#7A5030]/50 border border-[#7A5030]/50 hover:border-[#AD652E]/50 transition-all duration-200 cursor-pointer text-right"
       >
         <div className="flex items-center gap-3">
-          <div className="w-2 h-2 rounded-full bg-[#C8971A]" />
-          <h3 className="text-[#F5EDD6] font-bold text-base sm:text-lg">{category.category}</h3>
-          <span className="text-[#8A7560] text-xs bg-[#3D2E1A] px-2 py-0.5 rounded-full">
-            {category.items.length} מנות
+          <div className="w-1.5 h-1.5 rounded-full bg-[#AD652E] shrink-0" />
+          <h3
+            className="text-[#E4E1D8] font-bold text-sm sm:text-base"
+            style={{ fontFamily: "'Frank Ruhl Libre', serif" }}
+          >
+            {category.category}
+          </h3>
+          <span
+            className="text-[#E4E1D8]/40 text-xs bg-[#7A5030]/60 px-2 py-0.5 rounded-full"
+            style={{ fontFamily: "'Assistant', sans-serif" }}
+          >
+            {category.items.length}
           </span>
         </div>
         <motion.div
-          animate={{ rotate: isOpen ? 180 : 0 }}
+          animate={{ rotate: open ? 180 : 0 }}
           transition={{ duration: 0.2 }}
+          className="shrink-0"
         >
-          <ChevronDown className="w-4 h-4 text-[#C8971A]" />
+          <ChevronDown className="w-4 h-4 text-[#AD652E]" />
         </motion.div>
       </button>
 
       <AnimatePresence initial={false}>
-        {isOpen && (
+        {open && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            transition={{ duration: 0.22, ease: 'easeInOut' }}
             className="overflow-hidden"
           >
-            <div className="pt-2 px-1">
+            <div className="pt-1 px-1">
               {category.items.map((item) => (
-                <MenuItemCard key={item.name} item={item} />
+                <MenuItemRow key={item.name} item={item} />
               ))}
             </div>
           </motion.div>
@@ -97,6 +118,7 @@ function CategorySection({ category }: { category: MenuCategory }) {
   )
 }
 
+/* ─── The modal itself ────────────────────────────────────────────────── */
 interface MenuModalProps {
   open: boolean
   onOpenChange: (open: boolean) => void
@@ -107,52 +129,64 @@ export default function MenuModal({ open, onOpenChange }: MenuModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl w-[95vw] max-h-[90vh] p-0 flex flex-col bg-[#1A1108] border-[#3D2E1A] rounded-2xl overflow-hidden">
+      {/* DialogContent already has brown (#5F3C20) background from dialog.tsx */}
+      <DialogContent className="max-w-2xl w-[95vw] max-h-[90vh] flex flex-col">
 
-        {/* Header */}
-        <div className="flex-shrink-0 relative">
-          {/* Header background */}
-          <div className="absolute inset-0 bg-gradient-to-l from-[#8B1A1A]/60 via-[#251A0E] to-[#251A0E]" />
-          <div className="absolute bottom-0 right-0 left-0 h-px bg-gradient-to-r from-transparent via-[#C8971A]/40 to-transparent" />
+        {/* ── Header ── */}
+        <div className="shrink-0 relative">
+          {/* Warm gradient wash */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#7A5030]/40 to-transparent pointer-events-none" />
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#AD652E]/40 to-transparent" />
 
-          <div className="relative z-10 px-6 pt-8 pb-6">
+          <div className="relative z-10 px-6 pt-9 pb-6">
             <DialogHeader>
-              <div className="flex justify-center mb-4">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#C8971A] to-[#8B1A1A] flex items-center justify-center shadow-xl shadow-[#C8971A]/20">
-                  <UtensilsCrossed className="w-8 h-8 text-[#F5EDD6]" />
-                </div>
-              </div>
-              <DialogTitle className="text-2xl sm:text-3xl font-black text-center">
-                <span className="text-[#F5EDD6]">התפריט </span>
-                <span
+              {/* Arch ornament above title */}
+              <div className="flex justify-center mb-5">
+                <div
+                  className="w-14 h-16 bg-[#AD652E] flex items-center justify-center shadow-xl shadow-black/30"
                   style={{
-                    background: 'linear-gradient(135deg, #C8971A 0%, #E4B84A 50%, #C8971A 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
+                    borderTopLeftRadius: '9999px',
+                    borderTopRightRadius: '9999px',
+                    borderBottomLeftRadius: '10px',
+                    borderBottomRightRadius: '10px',
                   }}
                 >
-                  שלנו
-                </span>
+                  <span
+                    className="text-[#E4E1D8] font-black text-xl"
+                    style={{ fontFamily: "'Frank Ruhl Libre', serif" }}
+                  >
+                    נח
+                  </span>
+                </div>
+              </div>
+
+              <DialogTitle
+                className="text-2xl sm:text-3xl font-black text-center text-[#E4E1D8]"
+                style={{ fontFamily: "'Frank Ruhl Libre', serif" }}
+              >
+                התפריט שלנו
               </DialogTitle>
-              <DialogDescription className="text-center text-[#8A7560] mt-1">
+              <DialogDescription className="text-center text-[#E4E1D8]/50 mt-1 text-xs tracking-wide">
                 המחירים כוללים מע&quot;מ
               </DialogDescription>
             </DialogHeader>
           </div>
         </div>
 
-        {/* Category tabs */}
-        <div className="flex-shrink-0 px-4 pb-3 overflow-x-auto">
-          <div className="flex gap-2 min-w-max">
+        {/* ── Category quick-scroll tabs ── */}
+        <div className="shrink-0 px-4 pb-3 overflow-x-auto border-b border-[#7A5030]/40">
+          <div className="flex gap-2 min-w-max py-1">
             {categories.map((cat, i) => (
               <button
                 key={i}
                 onClick={() => {
-                  const el = document.getElementById(`cat-${i}`)
-                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+                  document.getElementById(`mcat-${i}`)?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                  })
                 }}
-                className="px-3 py-1.5 rounded-full text-xs font-medium border border-[#3D2E1A] text-[#C8B896] hover:text-[#C8971A] hover:border-[#C8971A]/50 transition-all duration-150 whitespace-nowrap bg-transparent cursor-pointer"
+                className="px-3 py-1.5 rounded-full text-xs font-medium border border-[#7A5030] text-[#E4E1D8]/65 hover:text-[#E4E1D8] hover:border-[#AD652E]/60 hover:bg-[#AD652E]/10 transition-all duration-150 whitespace-nowrap bg-transparent cursor-pointer"
+                style={{ fontFamily: "'Assistant', sans-serif" }}
               >
                 {cat.category}
               </button>
@@ -160,18 +194,21 @@ export default function MenuModal({ open, onOpenChange }: MenuModalProps) {
           </div>
         </div>
 
-        {/* Scrollable menu content */}
-        <div className="flex-1 overflow-y-auto px-4 sm:px-6 pb-6 space-y-0">
+        {/* ── Scrollable menu body ── */}
+        <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-4">
           {categories.map((category, index) => (
-            <div id={`cat-${index}`} key={index}>
-              <CategorySection category={category} />
+            <div id={`mcat-${index}`} key={index}>
+              <CategorySection category={category} defaultOpen={index === 0} />
             </div>
           ))}
         </div>
 
-        {/* Footer note */}
-        <div className="flex-shrink-0 border-t border-[#3D2E1A] px-6 py-4 bg-[#0F0A07]">
-          <p className="text-[#8A7560] text-xs text-center">
+        {/* ── Footer note ── */}
+        <div className="shrink-0 border-t border-[#7A5030]/40 px-6 py-4">
+          <p
+            className="text-[#E4E1D8]/40 text-xs text-center"
+            style={{ fontFamily: "'Assistant', sans-serif" }}
+          >
             לאלרגיות ובקשות מיוחדות, אנא פנו לצוות השירות שלנו
           </p>
         </div>

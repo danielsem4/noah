@@ -4,25 +4,29 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-200 cursor-pointer disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-semibold transition-all duration-200 cursor-pointer disabled:pointer-events-none disabled:opacity-50 font-[Assistant]',
   {
     variants: {
       variant: {
+        /* Primary CTA — amber */
         default:
-          'bg-[#C8971A] text-[#0F0A07] hover:bg-[#E4B84A] shadow-lg shadow-[#C8971A]/20 font-semibold',
-        destructive:
-          'bg-[#8B1A1A] text-[#F5EDD6] hover:bg-[#A52A2A] shadow-lg shadow-[#8B1A1A]/20',
+          'bg-[#AD652E] text-[#E4E1D8] hover:bg-[#C97B42] shadow-lg shadow-[#AD652E]/25 hover:shadow-[#AD652E]/40 hover:-translate-y-0.5 active:translate-y-0',
+        /* Secondary — truffle outlined */
         outline:
-          'border border-[#C8971A] text-[#C8971A] bg-transparent hover:bg-[#C8971A]/10',
+          'border-2 border-[#82583B] text-[#82583B] bg-transparent hover:bg-[#82583B] hover:text-[#E4E1D8] transition-colors duration-200',
+        /* Ghost — minimal */
         ghost:
-          'text-[#C8B896] hover:text-[#F5EDD6] hover:bg-[#251A0E]',
-        link: 'text-[#C8971A] underline-offset-4 hover:underline',
+          'text-[#82583B] hover:text-[#AD652E] hover:bg-[#AD652E]/10',
+        /* Dark (for use on brown/modal backgrounds) */
+        dark:
+          'bg-[#E4E1D8] text-[#5F3C20] hover:bg-white hover:text-[#5F3C20] shadow-lg shadow-black/20',
+        link: 'text-[#AD652E] underline-offset-4 hover:underline',
       },
       size: {
-        default: 'h-10 px-6 py-2',
-        sm: 'h-8 rounded-md px-4 text-xs',
-        lg: 'h-12 rounded-md px-10 text-base',
-        xl: 'h-14 rounded-lg px-12 text-lg',
+        default: 'h-11 px-6 py-2 text-sm',
+        sm: 'h-8 rounded px-4 text-xs',
+        lg: 'h-13 px-10 text-base',
+        xl: 'h-14 rounded-xl px-12 text-lg tracking-wide',
         icon: 'h-10 w-10',
       },
     },

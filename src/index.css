@@ -1,30 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand colors extracted from restaurant imagery - warm, rich palette */
-  --color-primary: #8B1A1A;
-  --color-primary-light: #A52A2A;
-  --color-primary-dark: #5C0F0F;
+  /* ── Strict Brand Palette ─────────────────────────────────────────── */
+  --color-black:   #000000;   /* High-contrast text, sharp details       */
+  --color-white:   #E4E1D8;   /* Main background — soft off-white/beige  */
+  --color-amber:   #AD652E;   /* CTAs, active states, highlights         */
+  --color-truffle: #82583B;   /* Borders, secondary accents, muted text  */
+  --color-brown:   #5F3C20;   /* Footer bg, modal bg, deep contrast      */
 
-  --color-secondary: #C8971A;
-  --color-secondary-light: #E4B84A;
-  --color-secondary-dark: #9A6F10;
+  /* ── Derived tints (used for hover states etc.) ────────────────────── */
+  --color-amber-light:   #C97B42;
+  --color-amber-dark:    #8A4E22;
+  --color-truffle-light: #A07355;
+  --color-white-dim:     #D4CFC5;   /* Slightly darker beige for cards   */
+  --color-brown-light:   #7A5030;   /* Lighter brown for borders in dark */
 
-  --color-accent: #D4A853;
-
-  --color-background: #0F0A07;
-  --color-surface: #1A1108;
-  --color-surface-elevated: #251A0E;
-  --color-surface-card: #2E2010;
-
-  --color-text-primary: #F5EDD6;
-  --color-text-secondary: #C8B896;
-  --color-text-muted: #8A7560;
-
-  --color-border: #3D2E1A;
-  --color-border-light: #5C4523;
-
-  --font-sans: 'Heebo', system-ui, sans-serif;
+  /* ── Typography ────────────────────────────────────────────────────── */
+  --font-heading: 'Frank Ruhl Libre', Georgia, serif;
+  --font-body:    'Assistant', system-ui, sans-serif;
 }
 
 *, *::before, *::after {
@@ -33,51 +26,68 @@
 
 html {
   scroll-behavior: smooth;
-  font-family: 'Heebo', system-ui, sans-serif;
-  background-color: #0F0A07;
-  color: #F5EDD6;
+  font-family: 'Assistant', system-ui, sans-serif;
+  background-color: #E4E1D8;
+  color: #000000;
 }
 
 body {
   margin: 0;
   overflow-x: hidden;
-  background-color: #0F0A07;
+  background-color: #E4E1D8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #1A1108;
-}
-::-webkit-scrollbar-thumb {
-  background: #5C4523;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #9A6F10;
+/* ── Headings use the serif font ──────────────────────────────────────── */
+h1, h2, h3 {
+  font-family: 'Frank Ruhl Libre', Georgia, serif;
 }
 
-.gold-text {
-  background: linear-gradient(135deg, #C8971A 0%, #E4B84A 50%, #C8971A 100%);
+/* ── Scrollbar ────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #E4E1D8; }
+::-webkit-scrollbar-thumb { background: #82583B; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #AD652E; }
+
+/* ── Utility: amber text gradient ────────────────────────────────────── */
+.amber-text {
+  background: linear-gradient(135deg, #AD652E 0%, #C97B42 50%, #AD652E 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
+/* ── Section divider — a thin amber rule ─────────────────────────────── */
 .section-divider {
-  width: 80px;
+  width: 60px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #C8971A, transparent);
+  background: linear-gradient(90deg, transparent, #AD652E, transparent);
   margin: 0 auto;
 }
 
-/* Glassmorphism utility */
-.glass {
-  background: rgba(15, 10, 7, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(92, 69, 35, 0.4);
+/* ── Light glassmorphism for navbar-on-scroll ─────────────────────────── */
+.glass-light {
+  background: rgba(228, 225, 216, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(130, 88, 59, 0.25);
+}
+
+/* ── Subtle paper grain texture ──────────────────────────────────────── */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Arch shape helper (for gallery cards) ────────────────────────────── */
+.arch-top {
+  border-top-left-radius: 9999px;
+  border-top-right-radius: 9999px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }

@@ -6,7 +6,7 @@ import Orders from '@/components/sections/Orders'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#0F0A07] text-[#F5EDD6]" dir="rtl">
+    <div className="min-h-screen bg-[#E4E1D8] text-[#000000]" dir="rtl">
       <Navbar />
       <main>
         <Hero />
