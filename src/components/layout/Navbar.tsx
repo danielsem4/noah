@@ -1,27 +1,38 @@
-import { useState, useEffect } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import logoSrc from "../../assets/logo.jpeg";
+import { useSectionRefs } from "@/lib/SectionRefsContext";
+import logoSrc from "../../assets/optimized/logo.webp";
 
-const navLinks = [
-  { label: "בית", href: "#hero" },
-  { label: "גלריה", href: "#gallery" },
-  { label: "להזמנות", href: "#orders" },
+type SectionId = "hero" | "gallery" | "orders";
+
+const navLinks: { label: string; id: SectionId }[] = [
+  { label: "בית", id: "hero" },
+  { label: "גלריה", id: "gallery" },
+  { label: "להזמנות", id: "orders" },
 ];
 
+function subscribeScroll(cb: () => void) {
+  window.addEventListener("scroll", cb, { passive: true });
+  return () => window.removeEventListener("scroll", cb);
+}
+
+function getScrollSnapshot() {
+  return window.scrollY > 40;
+}
+
+function getServerSnapshot() {
+  return false;
+}
+
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const scrolled = useSyncExternalStore(subscribeScroll, getScrollSnapshot, getServerSnapshot);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { scrollTo } = useSectionRefs();
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const goto = (href: string) => {
+  const goto = (id: SectionId) => {
     setMobileOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    scrollTo(id);
   };
 
   return (
@@ -40,17 +51,11 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16 sm:h-20">
             {/* ── Logo ── */}
             <button
-              onClick={() => goto("#hero")}
+              onClick={() => goto("hero")}
+              aria-label="דף הבית"
               className="flex items-center gap-3 cursor-pointer bg-transparent border-none"
             >
-              {/* Real logo image */}
-              <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden shadow-md shadow-[#AD652E]/30 flex-shrink-0 border border-[#AD652E]/30">
-                <img
-                  src={logoSrc}
-                  alt=" בר מסעדה - Noah"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+
               <div className="hidden sm:flex flex-col leading-tight text-right">
                 <span
                   className="text-[#000000] font-bold text-sm tracking-wide"
@@ -68,8 +73,8 @@ export default function Navbar() {
             >
               {navLinks.map((link) => (
                 <button
-                  key={link.href}
-                  onClick={() => goto(link.href)}
+                  key={link.id}
+                  onClick={() => goto(link.id)}
                   className="relative text-[#000000] hover:text-[#AD652E] font-medium text-sm transition-colors duration-200 group cursor-pointer bg-transparent border-none"
                   style={{ fontFamily: "'Assistant', sans-serif" }}
                 >
@@ -115,6 +120,8 @@ export default function Navbar() {
                 <img
                   src={logoSrc}
                   alt="קבוצת נח"
+                  width={48}
+                  height={48}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -135,14 +142,14 @@ export default function Navbar() {
             <nav className="flex flex-col py-3 px-4" aria-label="ניווט נייד">
               {navLinks.map((link, i) => (
                 <motion.button
-                  key={link.href}
+                  key={link.id}
                   initial={{ opacity: 0, x: 14 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{
                     delay: i * 0.07,
                     ease: [0.25, 0.46, 0.45, 0.94],
                   }}
-                  onClick={() => goto(link.href)}
+                  onClick={() => goto(link.id)}
                   className="text-right font-semibold text-lg py-3.5 px-3 rounded-xl transition-all duration-200 bg-transparent border-none w-full cursor-pointer"
                   style={{
                     fontFamily: "'Frank Ruhl Libre', serif",

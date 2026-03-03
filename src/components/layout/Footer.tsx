@@ -1,11 +1,14 @@
 import { Phone, MessageCircle, MapPin, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 import WaveDivider from "@/components/ui/WaveDivider";
+import { useSectionRefs } from "@/lib/SectionRefsContext";
 
-const quickLinks = [
-  { label: "בית", href: "#hero" },
-  { label: "גלריה", href: "#gallery" },
-  { label: "להזמנות", href: "#orders" },
+type SectionId = "hero" | "gallery" | "orders";
+
+const quickLinks: { label: string; id: SectionId }[] = [
+  { label: "בית", id: "hero" },
+  { label: "גלריה", id: "gallery" },
+  { label: "להזמנות", id: "orders" },
 ];
 
 const openingHours = [
@@ -17,7 +20,7 @@ const openingHours = [
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
     <h3
-      className="text-[#AD652E] font-semibold text-base uppercase tracking-widest mb-5 flex items-center gap-2"
+      className="text-[#DEAC68] font-semibold text-base uppercase tracking-widest mb-5 flex items-center gap-2"
       style={{ fontFamily: "'Assistant', sans-serif" }}
     >
       {children}
@@ -26,9 +29,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 export default function Footer() {
-  const goto = (href: string) => {
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
-  };
+  const { scrollTo } = useSectionRefs();
 
   return (
     <>
@@ -71,7 +72,7 @@ export default function Footer() {
                   >
                     בר מסעדה - Noah
                   </p>
-                  <p className="text-[#AD652E] text-xs font-medium">
+                  <p className="text-[#DEAC68] text-xs font-medium">
                     אירוח בע&quot;מ
                   </p>
                 </div>
@@ -127,7 +128,7 @@ export default function Footer() {
                     className="flex justify-between items-center text-base gap-4"
                   >
                     <span className="text-white/90">{item.day}</span>
-                    <span className="text-[#AD652E] font-medium ltr text-sm tabular-nums">
+                    <span className="text-[#DEAC68] font-medium ltr text-sm tabular-nums">
                       {item.hours}
                     </span>
                   </li>
@@ -177,7 +178,7 @@ export default function Footer() {
               </div>
 
               <p
-                className="text-[#AD652E] text-xs uppercase tracking-widest font-semibold mb-3"
+                className="text-[#DEAC68] text-xs uppercase tracking-widest font-semibold mb-3"
                 style={{ fontFamily: "'Assistant', sans-serif" }}
               >
                 ניווט מהיר
@@ -187,9 +188,9 @@ export default function Footer() {
                 style={{ fontFamily: "'Assistant', sans-serif" }}
               >
                 {quickLinks.map((link) => (
-                  <li key={link.href}>
+                  <li key={link.id}>
                     <button
-                      onClick={() => goto(link.href)}
+                      onClick={() => scrollTo(link.id)}
                       className="text-white/80 hover:text-[#AD652E] text-base transition-colors bg-transparent border-none cursor-pointer"
                     >
                       {link.label}
@@ -203,7 +204,7 @@ export default function Footer() {
           {/* ── Bottom bar ── */}
           <div className="mt-12 pt-6 border-t border-[#7A5030]/60 flex flex-col sm:flex-row items-center justify-between gap-3">
             <p
-              className="text-white/60 text-sm"
+              className="text-white/70 text-sm"
               style={{ fontFamily: "'Assistant', sans-serif" }}
             >
               © {new Date().getFullYear()} קבוצת נח אירוח בע&quot;מ. כל הזכויות

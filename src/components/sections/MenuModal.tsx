@@ -5,8 +5,19 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog'
+import { motion, AnimatePresence } from 'framer-motion'
 import menuData from '@/data/menuData.json'
-import logoSrc from '../../assets/logo.jpeg'
+import logoSrc from '../../assets/optimized/logo.webp'
+
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.07, delayChildren: 0.15 } },
+}
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const } },
+}
 
 interface MenuItem {
   name: string
@@ -102,69 +113,83 @@ export default function MenuModal({ open, onOpenChange }: MenuModalProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl w-[95vw] max-h-[90vh] flex flex-col">
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              className="flex flex-col h-full overflow-hidden"
+              variants={stagger}
+              initial="hidden"
+              animate="show"
+            >
+              {/* ── Header ── */}
+              <div className="shrink-0">
+                <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#AD652E]/30 to-transparent" />
 
-        {/* ── Header ── */}
-        <div className="shrink-0">
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#AD652E]/30 to-transparent" />
+                <div className="px-6 pt-8 pb-5">
+                  <DialogHeader>
+                    {/* Logo circle */}
+                    <motion.div variants={fadeUp} className="flex justify-center mb-4">
+                      <div className="w-20 h-20 rounded-full overflow-hidden shadow-lg shadow-black/15 border border-black/10">
+                        <img src={logoSrc} alt="קבוצת נח" width={80} height={80} className="w-full h-full object-cover" />
+                      </div>
+                    </motion.div>
 
-          <div className="px-6 pt-8 pb-5">
-            <DialogHeader>
-              {/* Logo circle */}
-              <div className="flex justify-center mb-4">
-                <div className="w-20 h-20 rounded-full overflow-hidden shadow-lg shadow-black/15 border border-black/10">
-                  <img src={logoSrc} alt="קבוצת נח" className="w-full h-full object-cover" />
+                    <motion.div variants={fadeUp}>
+                      <DialogTitle
+                        className="text-2xl sm:text-3xl font-black text-center text-black"
+                        style={{ fontFamily: "'Frank Ruhl Libre', serif" }}
+                      >
+                        התפריט שלנו
+                      </DialogTitle>
+                    </motion.div>
+                    <motion.div variants={fadeUp}>
+                      <DialogDescription className="text-center text-black/40 mt-1 text-xs tracking-wide">
+                        המחירים כוללים מע&quot;מ
+                      </DialogDescription>
+                    </motion.div>
+                  </DialogHeader>
                 </div>
               </div>
 
-              <DialogTitle
-                className="text-2xl sm:text-3xl font-black text-center text-black"
-                style={{ fontFamily: "'Frank Ruhl Libre', serif" }}
-              >
-                התפריט שלנו
-              </DialogTitle>
-              <DialogDescription className="text-center text-black/40 mt-1 text-xs tracking-wide">
-                המחירים כוללים מע&quot;מ
-              </DialogDescription>
-            </DialogHeader>
-          </div>
-        </div>
+              {/* ── Quick-jump tabs ── */}
+              <motion.div variants={fadeUp} className="shrink-0 px-4 pb-3 overflow-x-auto border-b border-black/8">
+                <div className="flex gap-2 min-w-max py-1">
+                  {categories.map((cat, i) => (
+                    <button
+                      key={i}
+                      onClick={() =>
+                        document
+                          .getElementById(`mcat-${i}`)
+                          ?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+                      }
+                      className="px-3 py-1.5 rounded-full text-xs font-medium border border-black/15 text-black/60 hover:text-black hover:border-[#AD652E]/60 hover:bg-[#AD652E]/8 transition-all duration-150 whitespace-nowrap bg-transparent cursor-pointer"
+                      style={{ fontFamily: "'Assistant', sans-serif" }}
+                    >
+                      {cat.category}
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
 
-        {/* ── Quick-jump tabs ── */}
-        <div className="shrink-0 px-4 pb-3 overflow-x-auto border-b border-black/8">
-          <div className="flex gap-2 min-w-max py-1">
-            {categories.map((cat, i) => (
-              <button
-                key={i}
-                onClick={() =>
-                  document
-                    .getElementById(`mcat-${i}`)
-                    ?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-                }
-                className="px-3 py-1.5 rounded-full text-xs font-medium border border-black/15 text-black/60 hover:text-black hover:border-[#AD652E]/60 hover:bg-[#AD652E]/8 transition-all duration-150 whitespace-nowrap bg-transparent cursor-pointer"
-                style={{ fontFamily: "'Assistant', sans-serif" }}
-              >
-                {cat.category}
-              </button>
-            ))}
-          </div>
-        </div>
+              {/* ── Scrollable body — all categories always visible ── */}
+              <motion.div variants={fadeUp} className="flex-1 overflow-y-auto px-5 sm:px-6 py-5">
+                {categories.map((cat, i) => (
+                  <CategoryBlock key={i} cat={cat} id={`mcat-${i}`} />
+                ))}
+              </motion.div>
 
-        {/* ── Scrollable body — all categories always visible ── */}
-        <div className="flex-1 overflow-y-auto px-5 sm:px-6 py-5">
-          {categories.map((cat, i) => (
-            <CategoryBlock key={i} cat={cat} id={`mcat-${i}`} />
-          ))}
-        </div>
-
-        {/* ── Footer ── */}
-        <div className="shrink-0 border-t border-black/8 px-6 py-4">
-          <p
-            className="text-black/35 text-xs text-center"
-            style={{ fontFamily: "'Assistant', sans-serif" }}
-          >
-            לאלרגיות ובקשות מיוחדות, אנא פנו לצוות השירות שלנו
-          </p>
-        </div>
+              {/* ── Footer ── */}
+              <motion.div variants={fadeUp} className="shrink-0 border-t border-black/8 px-6 py-4">
+                <p
+                  className="text-black/35 text-xs text-center"
+                  style={{ fontFamily: "'Assistant', sans-serif" }}
+                >
+                  לאלרגיות ובקשות מיוחדות, אנא פנו לצוות השירות שלנו
+                </p>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </DialogContent>
     </Dialog>
   )

@@ -1,6 +1,7 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Phone, UtensilsCrossed, Star } from 'lucide-react'
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { useSectionRefs } from "@/lib/SectionRefsContext";
+import { Phone, UtensilsCrossed, Star } from "lucide-react";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -11,10 +12,10 @@ function WhatsAppIcon({ className }: { className?: string }) {
         fill="white"
       />
     </svg>
-  )
+  );
 }
-import WaveDivider from '@/components/ui/WaveDivider'
-import MenuModal from './MenuModal'
+import WaveDivider from "@/components/ui/WaveDivider";
+import MenuModal from "./MenuModal";
 
 /* ── Contact card ─────────────────────────────────────────────────────── */
 function ContactCard({
@@ -24,19 +25,22 @@ function ContactCard({
   number,
   iconColor,
   target,
+  ariaLabel,
 }: {
-  href: string
-  icon: React.ReactNode
-  label: string
-  number: string
-  iconColor: string
-  target?: string
+  href: string;
+  icon: React.ReactNode;
+  label: string;
+  number: string;
+  iconColor: string;
+  target?: string;
+  ariaLabel?: string;
 }) {
   return (
     <a
       href={href}
       target={target}
-      rel={target ? 'noopener noreferrer' : undefined}
+      rel={target ? "noopener noreferrer" : undefined}
+      aria-label={ariaLabel}
       className="group flex flex-col items-center gap-4 p-7 rounded-2xl bg-[#E4E1D8] border border-[#82583B]/20 hover:border-[#AD652E]/50 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-[#82583B]/15"
     >
       <div
@@ -59,26 +63,25 @@ function ContactCard({
         </p>
       </div>
     </a>
-  )
+  );
 }
 
 export default function Orders() {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { registerRef } = useSectionRefs();
 
   return (
     <>
       {/* ── Wave divider from Gallery (#E4E1D8) into Orders (#D4CFC5) ── */}
       <WaveDivider fill="#D4CFC5" bg="#E4E1D8" />
 
-      <section
-        id="orders"
-        className="relative py-24 sm:py-36 bg-[#D4CFC5] overflow-hidden"
-      >
-        {/* Subtle warm grain */}
+      <section ref={registerRef("orders")} className="relative py-24 sm:py-36 bg-[#D4CFC5] overflow-hidden">
+        {/* Subtle warm grain — hidden on mobile for performance */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-30"
+          className="absolute inset-0 pointer-events-none opacity-30 hidden sm:block"
           style={{
-            backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E\")",
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E\")",
           }}
         />
 
@@ -90,7 +93,6 @@ export default function Orders() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full border border-[#82583B]/8 pointer-events-none" />
 
         <div className="relative z-10 max-w-4xl mx-auto px-5 sm:px-8 lg:px-12 text-center">
-
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -100,7 +102,7 @@ export default function Orders() {
             className="mb-6"
           >
             <span
-              className="inline-flex items-center gap-2 border border-[#AD652E]/40 rounded-full px-4 py-1.5 text-[#AD652E] text-xs font-semibold tracking-widest uppercase"
+              className="inline-flex items-center gap-2 border border-[#7A4A2D]/40 rounded-full px-4 py-1.5 text-[#7A4A2D] text-xs font-semibold tracking-widest uppercase"
               style={{ fontFamily: "'Assistant', sans-serif" }}
             >
               ✦ &nbsp;הזמנות&nbsp; ✦
@@ -112,30 +114,31 @@ export default function Orders() {
             initial={{ opacity: 0, y: 22 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
             className="text-[#000000] leading-tight mb-5"
             style={{
               fontFamily: "'Frank Ruhl Libre', serif",
-              fontSize: 'clamp(2rem, 5vw, 3.8rem)',
+              fontSize: "clamp(2rem, 5vw, 3.8rem)",
               fontWeight: 700,
             }}
           >
-            רוצים לאכול{' '}
-            <span style={{ color: '#AD652E' }}>אצלנו?</span>
+            להזמנת משלוח
           </motion.h2>
 
-          {/* Sub-heading */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+          <motion.h2
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-[#82583B] text-base sm:text-lg mb-3"
-            style={{ fontFamily: "'Assistant', sans-serif" }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+            className="text-[#000000] leading-tight mb-5"
+            style={{
+              fontFamily: "'Frank Ruhl Libre', serif",
+              fontSize: "clamp(2rem, 5vw, 3.8rem)",
+              fontWeight: 700,
+            }}
           >
-            להזמנות חייגו למספר
-          </motion.p>
-
+            <span style={{ color: "#82583B" }}>חייגו או צרו קשר בווצאפ</span>
+          </motion.h2>
           {/* Divider */}
           <motion.div
             initial={{ scaleX: 0 }}
@@ -157,8 +160,9 @@ export default function Orders() {
                 href="tel:+972549605860"
                 icon={<Phone className="w-6 h-6 text-[#AD652E]" />}
                 iconColor="bg-[#AD652E]/10 border-[#AD652E]/25 group-hover:bg-[#AD652E]/20"
-                label="להזמנות חייגו"
+                label=""
                 number="054-960-5860"
+                ariaLabel="התקשרו אלינו 054-960-5860"
               />
             </motion.div>
             <motion.div
@@ -171,9 +175,10 @@ export default function Orders() {
                 href="https://wa.me/972549605860"
                 icon={<WhatsAppIcon className="w-7 h-7" />}
                 iconColor="bg-[#25D366]/10 border-[#25D366]/25 group-hover:bg-[#25D366]/20"
-                label="צרו קשר בווצאפ"
+                label=""
                 number="054-960-5860"
                 target="_blank"
+                ariaLabel="שלחו הודעה בווטסאפ 054-960-5860"
               />
             </motion.div>
           </div>
@@ -190,7 +195,7 @@ export default function Orders() {
               <Star key={i} className="w-4 h-4 text-[#AD652E] fill-[#AD652E]" />
             ))}
             <span
-              className="text-[#82583B] text-sm mr-2"
+              className="text-[#6B4A30] text-sm mr-2"
               style={{ fontFamily: "'Assistant', sans-serif" }}
             >
               מצוין ב-Google
@@ -206,7 +211,7 @@ export default function Orders() {
             className="flex flex-col items-center gap-3"
           >
             <p
-              className="text-[#82583B] text-sm mb-2"
+              className="text-[#6B4A30] text-sm mb-2"
               style={{ fontFamily: "'Assistant', sans-serif" }}
             >
               רוצים לראות מה יש לנו?
@@ -225,5 +230,5 @@ export default function Orders() {
 
       <MenuModal open={menuOpen} onOpenChange={setMenuOpen} />
     </>
-  )
+  );
 }

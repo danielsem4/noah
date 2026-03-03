@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
-import logoSrc from "../../assets/logo.jpeg";
+import { useSectionRefs } from "@/lib/SectionRefsContext";
+import logoSrc from "../../assets/logo_trans.png";
 
 const luxEase = [0.25, 0.46, 0.45, 0.94] as const;
 
@@ -15,17 +15,16 @@ function OrnamentLine() {
 }
 
 export default function Hero() {
-  const scrollTo = (id: string) =>
-    document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
+  const { registerRef, scrollTo } = useSectionRefs();
 
   return (
     <section
-      id="hero"
+      ref={registerRef("hero")}
       className="relative min-h-screen flex items-center bg-[#E4E1D8] overflow-hidden"
     >
-      {/* Subtle paper grain */}
+      {/* Subtle paper grain — hidden on mobile for performance */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-40"
+        className="absolute inset-0 pointer-events-none opacity-40 hidden sm:block"
         style={{
           backgroundImage:
             "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E\")",
@@ -41,8 +40,7 @@ export default function Hero() {
       <div
         className="absolute inset-0 opacity-[0.07] pointer-events-none"
         style={{
-          backgroundImage:
-            "radial-gradient(circle, #82583B 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, #82583B 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
@@ -88,10 +86,9 @@ export default function Hero() {
               className="text-[#82583B] text-base sm:text-lg leading-relaxed max-w-md mb-10"
               style={{ fontFamily: "'Assistant', sans-serif" }}
             >
-              נח מציג תפריט שף פיוז׳ן חלבי-ישראלי כשר, מגוון יינות, קוקטיילים
-              ייחודיים ואת כל סוגי האלכוהול. כאן נאספים טעמים עמוקים, אלכוהול
-              מדויק ורגעים שנוצרים מתוך לבביות, תשומת לב והקשבה לפרטים הקטנים.
-              שום דבר אינו מקרי.
+              נח מציג תפריט שף פיוז׳ן חלבי-ישראלי כשר, מגוון יינות, קוקטיילים ייחודיים ואת כל סוגי
+              האלכוהול. כאן נאספים טעמים עמוקים, אלכוהול מדויק ורגעים שנוצרים מתוך לבביות, תשומת לב
+              והקשבה לפרטים הקטנים. שום דבר אינו מקרי.
             </motion.p>
 
             {/* CTA buttons */}
@@ -102,14 +99,14 @@ export default function Hero() {
               className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto justify-center lg:justify-end"
             >
               <button
-                onClick={() => scrollTo("#orders")}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-13 px-10 rounded-xl bg-[#AD652E] text-[#E4E1D8] font-bold text-base hover:bg-[#C97B42] transition-all duration-300 shadow-lg shadow-[#AD652E]/25 hover:shadow-[#AD652E]/40 hover:-translate-y-0.5 active:translate-y-0"
+                onClick={() => scrollTo("orders")}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-13 px-10 rounded-xl bg-[#935024] text-[#E4E1D8] font-bold text-base hover:bg-[#AD652E] transition-all duration-300 shadow-lg shadow-[#AD652E]/25 hover:shadow-[#AD652E]/40 hover:-translate-y-0.5 active:translate-y-0"
                 style={{ fontFamily: "'Assistant', sans-serif" }}
               >
                 להזמנת משלוח
               </button>
               <button
-                onClick={() => scrollTo("#gallery")}
+                onClick={() => scrollTo("gallery")}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-13 px-10 rounded-xl border-2 border-[#82583B]/50 text-[#5F3C20] font-semibold text-base hover:border-[#AD652E] hover:text-[#AD652E] transition-all duration-300"
                 style={{ fontFamily: "'Assistant', sans-serif" }}
               >
@@ -130,43 +127,16 @@ export default function Hero() {
 
           {/* ── Logo side ── */}
           <div className="flex items-center justify-center order-first lg:order-last">
-            <motion.img
+            <img
               src={logoSrc}
               alt="קבוצת נח"
-              animate={{ y: [0, -14, 0] }}
-              transition={{
-                duration: 5.5,
-                ease: "easeInOut",
-                repeat: Infinity,
-              }}
+              width={320}
+              height={320}
               className="w-52 sm:w-64 lg:w-80 object-contain drop-shadow-2xl"
-              style={{ willChange: "transform" }}
             />
           </div>
         </div>
       </div>
-
-      {/* Scroll cue */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
-      >
-        <span
-          className="text-[#82583B]/70 text-[10px] tracking-[0.2em] uppercase"
-          style={{ fontFamily: "'Assistant', sans-serif" }}
-        >
-          גלול
-        </span>
-        <motion.div
-          animate={{ y: [0, 7, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-          style={{ willChange: "transform" }}
-        >
-          <ChevronDown className="w-4 h-4 text-[#AD652E]/60" />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }
