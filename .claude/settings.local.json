@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(tail:*)"
+      "Bash(tail:*)",
+      "Bash(echo glob not available, trying find:*)",
+      "Bash(grep:*)",
+      "Bash(grep carosuelFood\\\\|סיגר:*)"
     ]
   }
 }
