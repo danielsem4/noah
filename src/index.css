@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand colors extracted from restaurant imagery - warm, rich palette */
+  --color-primary: #8B1A1A;
+  --color-primary-light: #A52A2A;
+  --color-primary-dark: #5C0F0F;
+
+  --color-secondary: #C8971A;
+  --color-secondary-light: #E4B84A;
+  --color-secondary-dark: #9A6F10;
+
+  --color-accent: #D4A853;
+
+  --color-background: #0F0A07;
+  --color-surface: #1A1108;
+  --color-surface-elevated: #251A0E;
+  --color-surface-card: #2E2010;
+
+  --color-text-primary: #F5EDD6;
+  --color-text-secondary: #C8B896;
+  --color-text-muted: #8A7560;
+
+  --color-border: #3D2E1A;
+  --color-border-light: #5C4523;
+
+  --font-sans: 'Heebo', system-ui, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Heebo', system-ui, sans-serif;
+  background-color: #0F0A07;
+  color: #F5EDD6;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background-color: #0F0A07;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #1A1108;
+}
+::-webkit-scrollbar-thumb {
+  background: #5C4523;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9A6F10;
+}
+
+.gold-text {
+  background: linear-gradient(135deg, #C8971A 0%, #E4B84A 50%, #C8971A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-divider {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #C8971A, transparent);
+  margin: 0 auto;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(15, 10, 7, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(92, 69, 35, 0.4);
+}
