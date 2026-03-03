@@ -32,9 +32,8 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        /* Brown (#5F3C20) background with off-white text — premium modal */
         'fixed left-[50%] top-[50%] z-50 grid w-full max-w-4xl max-h-[90vh] translate-x-[-50%] translate-y-[-50%] gap-4',
-        'border border-[#7A5030] bg-[#5F3C20] shadow-2xl shadow-black/50 duration-200',
+        'border border-black/10 bg-white shadow-2xl shadow-black/30 duration-200',
         'data-[state=open]:animate-in data-[state=closed]:animate-out',
         'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
         'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
@@ -46,7 +45,7 @@ const DialogContent = React.forwardRef<
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute left-4 top-4 z-10 rounded-full p-2 text-[#E4E1D8]/60 hover:text-[#E4E1D8] hover:bg-[#7A5030] transition-colors focus:outline-none focus:ring-2 focus:ring-[#AD652E] focus:ring-offset-2 focus:ring-offset-[#5F3C20] disabled:pointer-events-none">
+      <DialogPrimitive.Close className="absolute left-4 top-4 z-10 rounded-full p-2 text-black/40 hover:text-black hover:bg-black/8 transition-colors focus:outline-none focus:ring-2 focus:ring-[#AD652E] focus:ring-offset-2 focus:ring-offset-white disabled:pointer-events-none">
         <X className="h-5 w-5" />
         <span className="sr-only">סגור</span>
       </DialogPrimitive.Close>
