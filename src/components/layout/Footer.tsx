@@ -1,16 +1,6 @@
 import { Phone, MessageCircle, MapPin, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 import WaveDivider from "@/components/ui/WaveDivider";
-import { useSectionRefs } from "@/lib/SectionRefsContext";
-
-type SectionId = "hero" | "gallery" | "orders";
-
-const quickLinks: { label: string; id: SectionId }[] = [
-  { label: "בית", id: "hero" },
-  { label: "גלריה", id: "gallery" },
-  { label: "להזמנות", id: "orders" },
-];
-
 const openingHours = [
   { day: "ראשון – חמישי", hours: "12:00 – 23:00" },
   { day: "שישי", hours: "סגור" },
@@ -29,8 +19,6 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 export default function Footer() {
-  const { scrollTo } = useSectionRefs();
-
   return (
     <>
       {/* Wave transition from orders (#E4E1D8) into footer (#5F3C20) */}
