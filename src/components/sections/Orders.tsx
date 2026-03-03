@@ -1,6 +1,18 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Phone, MessageCircle, UtensilsCrossed, Star } from 'lucide-react'
+import { Phone, UtensilsCrossed, Star } from 'lucide-react'
+
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <circle cx="24" cy="24" r="24" fill="#25D366" />
+      <path
+        d="M34.5 13.5C32.1 11.1 28.9 9.8 25.5 9.8C18.5 9.8 12.8 15.5 12.8 22.5C12.8 24.8 13.4 27 14.6 29L12.5 36.5L20.2 34.4C22.2 35.5 24.3 36.1 26.5 36.1C33.5 36.1 39.2 30.4 39.2 23.4C39.2 20 37.9 16.8 35.5 14.4L34.5 13.5ZM26.5 33.8C24.5 33.8 22.6 33.2 20.9 32.2L20.5 31.9L16 33.1L17.2 28.7L16.9 28.3C15.8 26.5 15.2 24.5 15.2 22.4C15.2 16.8 19.8 12.2 25.5 12.2C28.3 12.2 30.9 13.3 32.9 15.3C34.9 17.3 36 19.9 36 22.7C36 28.4 31.2 33.8 26.5 33.8ZM31.2 25C30.9 24.8 29.4 24.1 29.1 24C28.8 23.9 28.6 23.8 28.4 24.1C28.2 24.4 27.6 25 27.4 25.3C27.2 25.5 27.1 25.6 26.8 25.4C26.5 25.2 25.5 24.9 24.3 23.8C23.4 23 22.8 22 22.6 21.7C22.4 21.4 22.6 21.2 22.8 21C22.9 20.9 23.1 20.7 23.3 20.5C23.4 20.3 23.5 20.2 23.6 20C23.7 19.8 23.7 19.6 23.6 19.4C23.5 19.2 22.9 17.7 22.6 17.1C22.4 16.5 22.1 16.6 21.9 16.6H21.4C21.2 16.6 20.8 16.7 20.5 17C20.2 17.3 19.4 18 19.4 19.5C19.4 21 20.5 22.4 20.7 22.7C20.9 22.9 22.8 25.9 25.8 27.2C26.5 27.5 27.1 27.7 27.5 27.8C28.2 28 28.9 28 29.4 27.9C30 27.8 31.2 27.2 31.5 26.5C31.8 25.8 31.8 25.2 31.7 25.1L31.2 25Z"
+        fill="white"
+      />
+    </svg>
+  )
+}
 import WaveDivider from '@/components/ui/WaveDivider'
 import MenuModal from './MenuModal'
 
@@ -157,7 +169,7 @@ export default function Orders() {
             >
               <ContactCard
                 href="https://wa.me/972549605860"
-                icon={<MessageCircle className="w-6 h-6 text-[#25D366]" />}
+                icon={<WhatsAppIcon className="w-7 h-7" />}
                 iconColor="bg-[#25D366]/10 border-[#25D366]/25 group-hover:bg-[#25D366]/20"
                 label="צרו קשר בווצאפ"
                 number="054-960-5860"

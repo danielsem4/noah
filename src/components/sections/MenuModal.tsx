@@ -109,17 +109,9 @@ export default function MenuModal({ open, onOpenChange }: MenuModalProps) {
 
           <div className="px-6 pt-8 pb-5">
             <DialogHeader>
-              {/* Logo arch */}
+              {/* Logo circle */}
               <div className="flex justify-center mb-4">
-                <div
-                  className="w-14 h-16 overflow-hidden shadow-lg shadow-black/15"
-                  style={{
-                    borderTopLeftRadius: '9999px',
-                    borderTopRightRadius: '9999px',
-                    borderBottomLeftRadius: '10px',
-                    borderBottomRightRadius: '10px',
-                  }}
-                >
+                <div className="w-20 h-20 rounded-full overflow-hidden shadow-lg shadow-black/15 border border-black/10">
                   <img src={logoSrc} alt="קבוצת נח" className="w-full h-full object-cover" />
                 </div>
               </div>
