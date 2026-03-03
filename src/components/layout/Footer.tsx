@@ -104,9 +104,6 @@ export default function Footer() {
               >
                 <p>הכישור 45</p>
                 <p>חולון</p>
-                <p className="mt-2 text-white/60 text-sm">
-                  ניתן לחנות ברחוב החנייה
-                </p>
               </address>
             </motion.div>
 

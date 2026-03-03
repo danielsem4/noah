@@ -60,14 +60,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15, ease: luxEase }}
               className="mb-5"
-            >
-              <span
-                className="inline-flex items-center gap-2 border border-[#AD652E]/40 rounded-full px-4 py-1.5 text-[#AD652E] text-xs font-semibold tracking-widest uppercase"
-                style={{ fontFamily: "'Assistant', sans-serif" }}
-              >
-                ✦ &nbsp;ברוכים הבאים&nbsp; ✦
-              </span>
-            </motion.div>
+            ></motion.div>
 
             {/* Main heading */}
             <motion.h1
@@ -95,7 +88,7 @@ export default function Hero() {
               className="text-[#82583B] text-base sm:text-lg leading-relaxed max-w-md mb-10"
               style={{ fontFamily: "'Assistant', sans-serif" }}
             >
-              מציג תפריט שף פיוז׳ן חלבי-ישראלי כשר, מגוון יינות, קוקטיילים
+              נח מציג תפריט שף פיוז׳ן חלבי-ישראלי כשר, מגוון יינות, קוקטיילים
               ייחודיים ואת כל סוגי האלכוהול. כאן נאספים טעמים עמוקים, אלכוהול
               מדויק ורגעים שנוצרים מתוך לבביות, תשומת לב והקשבה לפרטים הקטנים.
               שום דבר אינו מקרי.
@@ -113,7 +106,7 @@ export default function Hero() {
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-13 px-10 rounded-xl bg-[#AD652E] text-[#E4E1D8] font-bold text-base hover:bg-[#C97B42] transition-all duration-300 shadow-lg shadow-[#AD652E]/25 hover:shadow-[#AD652E]/40 hover:-translate-y-0.5 active:translate-y-0"
                 style={{ fontFamily: "'Assistant', sans-serif" }}
               >
-                להזמנה עכשיו
+                להזמנת משלוח
               </button>
               <button
                 onClick={() => scrollTo("#gallery")}
