@@ -2,7 +2,6 @@ import { useState, useSyncExternalStore } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useSectionRefs } from "@/lib/SectionRefsContext";
-import logoSrc from "../../assets/optimized/logo.webp";
 
 type SectionId = "hero" | "gallery" | "orders";
 
@@ -58,7 +57,7 @@ export default function Navbar() {
 
               <div className="hidden sm:flex flex-col leading-tight text-right">
                 <span
-                  className="text-[#000000] font-bold text-sm tracking-wide"
+                  className="text-[#000000] font-bold text-base tracking-wide"
                   style={{ fontFamily: "'Frank Ruhl Libre', serif" }}
                 >
                   בר מסעדה - Noah
@@ -75,7 +74,7 @@ export default function Navbar() {
                 <button
                   key={link.id}
                   onClick={() => goto(link.id)}
-                  className="relative text-[#000000] hover:text-[#AD652E] font-medium text-sm transition-colors duration-200 group cursor-pointer bg-transparent border-none"
+                  className="relative text-[#000000] hover:text-[#AD652E] font-medium text-base transition-colors duration-200 group cursor-pointer bg-transparent border-none"
                   style={{ fontFamily: "'Assistant', sans-serif" }}
                 >
                   {link.label}
@@ -110,34 +109,10 @@ export default function Navbar() {
             transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="fixed top-16 sm:top-20 right-0 left-0 z-40 md:hidden shadow-2xl shadow-black/15"
             style={{
-              background: "#ffffff",
+              background: "#E4E1D8",
               borderTop: "1px solid rgba(0,0,0,0.08)",
             }}
           >
-            {/* Logo in menu */}
-            <div className="flex items-center gap-3 px-6 pt-5 pb-4 border-b border-black/8">
-              <div className="w-12 h-12 rounded-full overflow-hidden shadow-md flex-shrink-0 border border-black/10">
-                <img
-                  src={logoSrc}
-                  alt="קבוצת נח"
-                  width={48}
-                  height={48}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="flex flex-col leading-tight text-right">
-                <span
-                  className="text-black font-bold text-base"
-                  style={{ fontFamily: "'Frank Ruhl Libre', serif" }}
-                >
-                  קבוצת נח
-                </span>
-                <span className="text-black/50 text-xs font-medium">
-                  אירוח בע&quot;מ
-                </span>
-              </div>
-            </div>
-
             {/* Nav links */}
             <nav className="flex flex-col py-3 px-4" aria-label="ניווט נייד">
               {navLinks.map((link, i) => (

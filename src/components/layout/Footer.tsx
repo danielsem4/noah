@@ -57,14 +57,6 @@ export default function Footer() {
               className="lg:col-span-1"
             >
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-13 h-13 rounded-full bg-[#AD652E] flex items-center justify-center shadow-lg shadow-black/30 flex-shrink-0">
-                  <span
-                    className="text-[#E4E1D8] font-black text-xl"
-                    style={{ fontFamily: "'Frank Ruhl Libre', serif" }}
-                  >
-                    נח
-                  </span>
-                </div>
                 <div>
                   <p
                     className="text-[#E4E1D8] font-bold text-lg leading-tight"
@@ -72,21 +64,9 @@ export default function Footer() {
                   >
                     בר מסעדה - Noah
                   </p>
-                  <p className="text-[#DEAC68] text-xs font-medium">
-                    אירוח בע&quot;מ
-                  </p>
                 </div>
               </div>
-              <p
-                className="text-white/85 text-base leading-relaxed"
-                style={{ fontFamily: "'Assistant', sans-serif" }}
-              >
-                חוויה קולינרית ייחודית של טעמים מסורתיים עם נגיעה מודרנית.
-                מסעדה, אירועים ושמחות.
-              </p>
-              {/* Amber thin rule */}
-              <div className="mt-6 w-10 h-0.5 bg-[#AD652E]/60 rounded-full" />
-            </motion.div>
+                         </motion.div>
 
             {/* ── Address ── */}
             <motion.div
@@ -103,8 +83,7 @@ export default function Footer() {
                 className="not-italic text-white/90 text-base leading-loose"
                 style={{ fontFamily: "'Assistant', sans-serif" }}
               >
-                <p>הכישור 45</p>
-                <p>חולון</p>
+                <p>הכישור 45, חולון</p>
               </address>
             </motion.div>
 
@@ -125,7 +104,7 @@ export default function Footer() {
                 {openingHours.map((item) => (
                   <li
                     key={item.day}
-                    className="flex justify-between items-center text-base gap-4"
+                    className="flex justify-start sm:justify-between items-center text-base gap-4"
                   >
                     <span className="text-white/90">{item.day}</span>
                     <span className="text-[#DEAC68] font-medium ltr text-sm tabular-nums">
@@ -176,28 +155,6 @@ export default function Footer() {
                   </span>
                 </a>
               </div>
-
-              <p
-                className="text-[#DEAC68] text-xs uppercase tracking-widest font-semibold mb-3"
-                style={{ fontFamily: "'Assistant', sans-serif" }}
-              >
-                ניווט מהיר
-              </p>
-              <ul
-                className="space-y-2"
-                style={{ fontFamily: "'Assistant', sans-serif" }}
-              >
-                {quickLinks.map((link) => (
-                  <li key={link.id}>
-                    <button
-                      onClick={() => scrollTo(link.id)}
-                      className="text-white/80 hover:text-[#AD652E] text-base transition-colors bg-transparent border-none cursor-pointer"
-                    >
-                      {link.label}
-                    </button>
-                  </li>
-                ))}
-              </ul>
             </motion.div>
           </div>
 
@@ -207,8 +164,7 @@ export default function Footer() {
               className="text-white/70 text-sm"
               style={{ fontFamily: "'Assistant', sans-serif" }}
             >
-              © {new Date().getFullYear()} קבוצת נח אירוח בע&quot;מ. כל הזכויות
-              שמורות.
+              © {new Date().getFullYear()} כל הזכויות שמורות לNoah בר מסעדה
             </p>
             <div className="flex items-center gap-1.5">
               <span className="w-1 h-1 rounded-full bg-[#AD652E]/50" />

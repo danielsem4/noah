@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useSectionRefs } from "@/lib/SectionRefsContext";
-import logoSrc from "../../assets/logo_trans.png";
+import logoSrc from "../../assets/logo_transperent.png";
 
 const luxEase = [0.25, 0.46, 0.45, 0.94] as const;
 
