@@ -1,5 +1,5 @@
 import { useState, useSyncExternalStore } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useSectionRefs } from "@/lib/SectionRefsContext";
 
@@ -36,7 +36,7 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.header
+      <m.header
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -97,12 +97,12 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-      </motion.header>
+      </m.header>
 
       {/* ── Mobile dropdown ── */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -116,7 +116,7 @@ export default function Navbar() {
             {/* Nav links */}
             <nav className="flex flex-col py-3 px-4" aria-label="ניווט נייד">
               {navLinks.map((link, i) => (
-                <motion.button
+                <m.button
                   key={link.id}
                   initial={{ opacity: 0, x: 14 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -141,10 +141,10 @@ export default function Navbar() {
                   }}
                 >
                   {link.label}
-                </motion.button>
+                </m.button>
               ))}
             </nav>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

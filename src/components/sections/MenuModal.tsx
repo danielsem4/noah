@@ -5,7 +5,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import menuData from '@/data/menuData.json'
 import logoSrc from '../../assets/optimized/logo.webp'
 
@@ -115,7 +115,7 @@ export default function MenuModal({ open, onOpenChange }: MenuModalProps) {
       <DialogContent className="max-w-2xl w-[95vw] max-h-[90vh] flex flex-col">
         <AnimatePresence>
           {open && (
-            <motion.div
+            <m.div
               className="flex flex-col h-full overflow-hidden"
               variants={stagger}
               initial="hidden"
@@ -128,31 +128,31 @@ export default function MenuModal({ open, onOpenChange }: MenuModalProps) {
                 <div className="px-6 pt-8 pb-5">
                   <DialogHeader>
                     {/* Logo circle */}
-                    <motion.div variants={fadeUp} className="flex justify-center mb-4">
+                    <m.div variants={fadeUp} className="flex justify-center mb-4">
                       <div className="w-20 h-20 rounded-full overflow-hidden shadow-lg shadow-black/15 border border-black/10">
                         <img src={logoSrc} alt="קבוצת נח" width={80} height={80} className="w-full h-full object-cover" />
                       </div>
-                    </motion.div>
+                    </m.div>
 
-                    <motion.div variants={fadeUp}>
+                    <m.div variants={fadeUp}>
                       <DialogTitle
                         className="text-2xl sm:text-3xl font-black text-center text-black"
                         style={{ fontFamily: "'Frank Ruhl Libre', serif" }}
                       >
                         התפריט שלנו
                       </DialogTitle>
-                    </motion.div>
-                    <motion.div variants={fadeUp}>
+                    </m.div>
+                    <m.div variants={fadeUp}>
                       <DialogDescription className="text-center text-black/40 mt-1 text-xs tracking-wide">
                         המחירים כוללים מע&quot;מ
                       </DialogDescription>
-                    </motion.div>
+                    </m.div>
                   </DialogHeader>
                 </div>
               </div>
 
               {/* ── Quick-jump tabs ── */}
-              <motion.div variants={fadeUp} className="shrink-0 px-4 pb-3 overflow-x-auto border-b border-black/8">
+              <m.div variants={fadeUp} className="shrink-0 px-4 pb-3 overflow-x-auto border-b border-black/8">
                 <div className="flex gap-2 min-w-max py-1">
                   {categories.map((cat, i) => (
                     <button
@@ -169,25 +169,25 @@ export default function MenuModal({ open, onOpenChange }: MenuModalProps) {
                     </button>
                   ))}
                 </div>
-              </motion.div>
+              </m.div>
 
               {/* ── Scrollable body — all categories always visible ── */}
-              <motion.div variants={fadeUp} className="flex-1 overflow-y-auto px-5 sm:px-6 py-5">
+              <m.div variants={fadeUp} className="flex-1 overflow-y-auto px-5 sm:px-6 py-5">
                 {categories.map((cat, i) => (
                   <CategoryBlock key={i} cat={cat} id={`mcat-${i}`} />
                 ))}
-              </motion.div>
+              </m.div>
 
               {/* ── Footer ── */}
-              <motion.div variants={fadeUp} className="shrink-0 border-t border-black/8 px-6 py-4">
+              <m.div variants={fadeUp} className="shrink-0 border-t border-black/8 px-6 py-4">
                 <p
                   className="text-black/35 text-xs text-center"
                   style={{ fontFamily: "'Assistant', sans-serif" }}
                 >
                   לאלרגיות ובקשות מיוחדות, אנא פנו לצוות השירות שלנו
                 </p>
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </m.div>
           )}
         </AnimatePresence>
       </DialogContent>

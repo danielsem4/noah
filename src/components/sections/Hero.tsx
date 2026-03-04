@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useSectionRefs } from "@/lib/SectionRefsContext";
 import logoSrc from "../../assets/logo_transperent.png";
 
@@ -31,10 +31,10 @@ export default function Hero() {
         }}
       />
 
-      {/* Warm amber glow — lower-left */}
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-[#AD652E]/6 blur-[100px] pointer-events-none -translate-x-1/3 translate-y-1/3" />
-      {/* Truffle glow — upper-right */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-[#82583B]/5 blur-[80px] pointer-events-none translate-x-1/4 -translate-y-1/4" />
+      {/* Warm amber glow — lower-left (hidden on mobile for perf) */}
+      <div className="hidden sm:block absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-[#AD652E]/6 blur-[100px] pointer-events-none -translate-x-1/3 translate-y-1/3" />
+      {/* Truffle glow — upper-right (hidden on mobile for perf) */}
+      <div className="hidden sm:block absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-[#82583B]/5 blur-[80px] pointer-events-none translate-x-1/4 -translate-y-1/4" />
 
       {/* Dot-grid pattern */}
       <div
@@ -53,15 +53,15 @@ export default function Hero() {
           {/* Text side */}
           <div className="flex flex-col items-center lg:items-end text-center lg:text-right">
             {/* Label chip */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.05, ease: luxEase }}
               className="mb-5"
-            ></motion.div>
+            ></m.div>
 
             {/* Main heading */}
-            <motion.h1
+            <m.h1
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.15, ease: luxEase }}
@@ -76,10 +76,10 @@ export default function Hero() {
               ברוכים הבאים
               <br />
               <span style={{ color: "#AD652E" }}>לבר-מסעדה NOAH</span>
-            </motion.h1>
+            </m.h1>
 
             {/* Sub-copy */}
-            <motion.p
+            <m.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.28, ease: luxEase }}
@@ -89,10 +89,10 @@ export default function Hero() {
               נח מציג תפריט שף פיוז׳ן חלבי-ישראלי כשר, מגוון יינות, קוקטיילים ייחודיים ואת כל סוגי
               האלכוהול. כאן נאספים טעמים עמוקים, אלכוהול מדויק ורגעים שנוצרים מתוך לבביות, תשומת לב
               והקשבה לפרטים הקטנים. שום דבר אינו מקרי.
-            </motion.p>
+            </m.p>
 
             {/* CTA buttons */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.38, ease: luxEase }}
@@ -112,17 +112,17 @@ export default function Hero() {
               >
                 הגלריה שלנו
               </button>
-            </motion.div>
+            </m.div>
 
             {/* Ornament */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.48 }}
               className="mt-10 flex justify-center lg:justify-end w-full"
             >
               <OrnamentLine />
-            </motion.div>
+            </m.div>
           </div>
 
           {/* ── Logo side ── */}

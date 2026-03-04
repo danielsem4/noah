@@ -59,27 +59,25 @@ export default function FloatingWhatsApp() {
         <WhatsAppIcon size={28} />
       </span>
 
-      {/* Tooltip - slides out from behind the icon */}
+      {/* Tooltip - slides out from behind the icon (GPU clip-path, no layout reflow) */}
       <span
         style={{
           position: "relative",
           zIndex: 1,
           display: "flex",
           alignItems: "center",
-          overflow: "hidden",
-          maxWidth: hovered ? 240 : 0,
-          opacity: hovered ? 1 : 0,
           whiteSpace: "nowrap",
           background: "#1EBE5B",
           color: "#fff",
           fontFamily: "'Segoe UI', Tahoma, sans-serif",
           fontWeight: 600,
           fontSize: "clamp(13px, 2vw, 15px)",
-          padding: hovered ? "10px 16px 10px 20px" : "10px 0",
+          padding: "10px 16px 10px 20px",
           borderRadius: "24px 21px 0 24px",
           marginLeft: -14,
-          transition:
-            "max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, padding 0.4s ease",
+          clipPath: hovered ? "inset(0 0% 0 0 round 24px)" : "inset(0 100% 0 0 round 24px)",
+          opacity: hovered ? 1 : 0,
+          transition: "clip-path 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease",
           pointerEvents: "none",
         }}
       >

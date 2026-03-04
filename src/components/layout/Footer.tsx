@@ -1,5 +1,5 @@
 import { Phone, MessageCircle, MapPin, Clock } from "lucide-react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import WaveDivider from "@/components/ui/WaveDivider";
 const openingHours = [
   { day: "ראשון – חמישי", hours: "12:00 – 23:00" },
@@ -37,7 +37,7 @@ export default function Footer() {
         <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-14 pb-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
             {/* ── Brand column ── */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -54,10 +54,10 @@ export default function Footer() {
                   </p>
                 </div>
               </div>
-                         </motion.div>
+                         </m.div>
 
             {/* ── Address ── */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -73,9 +73,9 @@ export default function Footer() {
               >
                 <p>הכישור 45, חולון</p>
               </address>
-            </motion.div>
+            </m.div>
 
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -101,10 +101,10 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </m.div>
 
             {/* ── Contact + quick links ── */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -143,7 +143,7 @@ export default function Footer() {
                   </span>
                 </a>
               </div>
-            </motion.div>
+            </m.div>
           </div>
 
           {/* ── Bottom bar ── */}

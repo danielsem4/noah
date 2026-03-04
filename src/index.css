@@ -110,9 +110,17 @@ h1, h2, h3 {
 
 /* ── Light glassmorphism for navbar-on-scroll ─────────────────────────── */
 .glass-light {
-  background: rgba(228, 225, 216, 0.88);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background: rgba(228, 225, 216, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+@media (min-width: 640px) {
+  .glass-light {
+    background: rgba(228, 225, 216, 0.88);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
 }
 
 /* ── Subtle paper grain texture ──────────────────────────────────────── */
@@ -133,13 +141,7 @@ h1, h2, h3 {
   border-bottom-right-radius: 12px;
 }
 
-/* ── Performance: GPU-promote elements that animate on scroll ──────────── */
-[data-framer-motion-will-change] {
-  will-change: transform, opacity;
-}
-
-/* Ensure smooth image rendering during transforms */
-img {
-  transform: translateZ(0);
-  backface-visibility: hidden;
+/* ── Performance: contain paint for major sections ─────────────────────── */
+section {
+  contain: layout style;
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useSectionRefs } from "@/lib/SectionRefsContext";
 import { Phone, UtensilsCrossed, Star } from "lucide-react";
 
@@ -85,8 +85,8 @@ export default function Orders() {
           }}
         />
 
-        {/* Amber glow center */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#AD652E]/8 blur-[120px] pointer-events-none" />
+        {/* Amber glow center (hidden on mobile for perf) */}
+        <div className="hidden sm:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#AD652E]/8 blur-[120px] pointer-events-none" />
 
         {/* Decorative concentric arcs */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-[#AD652E]/10 pointer-events-none" />
@@ -94,7 +94,7 @@ export default function Orders() {
 
         <div className="relative z-10 max-w-4xl mx-auto px-5 sm:px-8 lg:px-12 text-center">
           {/* Badge */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -107,10 +107,10 @@ export default function Orders() {
             >
               ✦ &nbsp;הזמנות&nbsp; ✦
             </span>
-          </motion.div>
+          </m.div>
 
           {/* Heading */}
-          <motion.h2
+          <m.h2
             initial={{ opacity: 0, y: 22 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -123,9 +123,9 @@ export default function Orders() {
             }}
           >
             להזמנת משלוח
-          </motion.h2>
+          </m.h2>
 
-          <motion.h2
+          <m.h2
             initial={{ opacity: 0, y: 22 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -138,9 +138,9 @@ export default function Orders() {
             }}
           >
             <span style={{ color: "#82583B" }}>חייגו או צרו קשר בווצאפ</span>
-          </motion.h2>
+          </m.h2>
           {/* Divider */}
-          <motion.div
+          <m.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
@@ -150,7 +150,7 @@ export default function Orders() {
 
           {/* Contact cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-xl mx-auto mb-12">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -164,8 +164,8 @@ export default function Orders() {
                 number="054-960-5860"
                 ariaLabel="התקשרו אלינו 054-960-5860"
               />
-            </motion.div>
-            <motion.div
+            </m.div>
+            <m.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -180,11 +180,11 @@ export default function Orders() {
                 target="_blank"
                 ariaLabel="שלחו הודעה בווטסאפ 054-960-5860"
               />
-            </motion.div>
+            </m.div>
           </div>
 
           {/* Star rating */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -200,10 +200,10 @@ export default function Orders() {
             >
               מצוין ב-Google
             </span>
-          </motion.div>
+          </m.div>
 
           {/* Menu CTA */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -224,7 +224,7 @@ export default function Orders() {
               <UtensilsCrossed className="w-5 h-5" />
               תפריט
             </button>
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
