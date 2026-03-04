@@ -41,10 +41,10 @@ function ContactCard({
       target={target}
       rel={target ? "noopener noreferrer" : undefined}
       aria-label={ariaLabel}
-      className="group flex flex-col items-center gap-4 p-7 rounded-2xl bg-[#E4E1D8] border border-[#82583B]/20 hover:border-[#AD652E]/50 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-[#82583B]/15"
+      className="group flex flex-col items-center gap-4 p-7 rounded-2xl bg-[#E4E1D8] border border-[#82583B]/20 hover:border-[#AD652E]/50 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-[#82583B]/15"
     >
       <div
-        className={`w-14 h-14 rounded-full flex items-center justify-center border transition-all duration-300 ${iconColor} group-hover:scale-110`}
+        className={`w-14 h-14 rounded-full flex items-center justify-center border transition-[transform,background-color] duration-300 ${iconColor} group-hover:scale-110`}
       >
         {icon}
       </div>

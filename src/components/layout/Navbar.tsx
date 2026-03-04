@@ -40,7 +40,7 @@ export default function Navbar() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 right-0 left-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-300 ${
           scrolled
             ? "glass-light shadow-md shadow-[#82583B]/15"
             : "bg-transparent"
@@ -78,7 +78,7 @@ export default function Navbar() {
                   style={{ fontFamily: "'Assistant', sans-serif" }}
                 >
                   {link.label}
-                  <span className="absolute -bottom-1 right-0 w-0 h-[1.5px] bg-[#AD652E] transition-all duration-300 group-hover:w-full rounded-full" />
+                  <span className="absolute -bottom-1 right-0 w-0 h-[1.5px] bg-[#AD652E] transition-[width] duration-300 group-hover:w-full rounded-full" />
                 </button>
               ))}
             </nav>

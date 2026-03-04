@@ -111,7 +111,7 @@ export default function AtmosphereGallery() {
         <button
           onClick={() => api?.scrollPrev()}
           aria-label="הקודם"
-          className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border border-white/20 hover:border-[#AD652E]/70 bg-black/25 hover:bg-[#AD652E]/70 backdrop-blur-sm transition-all duration-300 hover:scale-110 active:scale-95"
+          className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border border-white/20 hover:border-[#AD652E]/70 bg-black/25 hover:bg-[#AD652E]/70 backdrop-blur-sm transition-[background-color,transform,border-color] duration-300 hover:scale-110 active:scale-95"
         >
           <ChevronRight className="w-5 h-5 text-white" />
         </button>
@@ -120,7 +120,7 @@ export default function AtmosphereGallery() {
         <button
           onClick={() => api?.scrollNext()}
           aria-label="הבא"
-          className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border border-white/20 hover:border-[#AD652E]/70 bg-black/25 hover:bg-[#AD652E]/70 backdrop-blur-sm transition-all duration-300 hover:scale-110 active:scale-95"
+          className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border border-white/20 hover:border-[#AD652E]/70 bg-black/25 hover:bg-[#AD652E]/70 backdrop-blur-sm transition-[background-color,transform,border-color] duration-300 hover:scale-110 active:scale-95"
         >
           <ChevronLeft className="w-5 h-5 text-white" />
         </button>
@@ -135,11 +135,10 @@ export default function AtmosphereGallery() {
               className="flex items-center justify-center min-w-[44px] min-h-[44px] p-2"
             >
               <span
-                className={`block rounded-full transition-all duration-500 ${
-                  i === current
-                    ? 'w-7 h-2 bg-[#AD652E]'
-                    : 'w-2 h-2 bg-white/40 hover:bg-white/70'
+                className={`block h-2 w-7 rounded-full transition-[transform,background-color] duration-500 origin-left ${
+                  i === current ? 'bg-[#AD652E]' : 'bg-white/40 hover:bg-white/70'
                 }`}
+                style={{ transform: i === current ? 'scaleX(1)' : 'scaleX(0.286)' }}
               />
             </button>
           ))}

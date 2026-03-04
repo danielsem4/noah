@@ -56,7 +56,7 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15, ease: luxEase }}
+              transition={{ duration: 0.55, delay: 0.05, ease: luxEase }}
               className="mb-5"
             ></motion.div>
 
@@ -64,7 +64,7 @@ export default function Hero() {
             <motion.h1
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, delay: 0.3, ease: luxEase }}
+              transition={{ duration: 0.65, delay: 0.15, ease: luxEase }}
               className="text-[#000000] leading-tight mb-6"
               style={{
                 fontFamily: "'Frank Ruhl Libre', Georgia, serif",
@@ -82,7 +82,7 @@ export default function Hero() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.46, ease: luxEase }}
+              transition={{ duration: 0.6, delay: 0.28, ease: luxEase }}
               className="text-[#82583B] text-base sm:text-lg leading-relaxed max-w-md mb-10"
               style={{ fontFamily: "'Assistant', sans-serif" }}
             >
@@ -95,7 +95,7 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.58, ease: luxEase }}
+              transition={{ duration: 0.6, delay: 0.38, ease: luxEase }}
               className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto justify-center lg:justify-end"
             >
               <button
@@ -118,7 +118,7 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.74 }}
+              transition={{ duration: 0.5, delay: 0.48 }}
               className="mt-10 flex justify-center lg:justify-end w-full"
             >
               <OrnamentLine />

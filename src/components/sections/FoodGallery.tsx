@@ -68,7 +68,7 @@ export default function FoodGallery() {
 
   if (foodItems.length === 0) {
     return (
-      <div className="flex justify-center py-12">
+      <div className="flex justify-center items-center py-12" style={{ minHeight: '300px' }}>
         <div className="w-8 h-8 border-2 border-[#AD652E] border-t-transparent rounded-full animate-spin" />
       </div>
     )
@@ -82,7 +82,7 @@ export default function FoodGallery() {
       <button
         onClick={() => api?.scrollPrev()}
         aria-label="הקודם"
-        className="absolute right-0 top-[38%] -translate-y-1/2 -translate-x-1 z-10 w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center bg-[#1C0A02] hover:bg-[#AD652E] border border-[#AD652E]/40 shadow-lg transition-all duration-300 hover:scale-110 active:scale-95"
+        className="absolute right-0 top-[38%] -translate-y-1/2 -translate-x-1 z-10 w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center bg-[#1C0A02] hover:bg-[#AD652E] border border-[#AD652E]/40 shadow-lg transition-[background-color,transform,box-shadow] duration-300 hover:scale-110 active:scale-95"
       >
         <ChevronRight className="w-5 h-5 text-[#E4E1D8]" />
       </button>
@@ -104,6 +104,7 @@ export default function FoodGallery() {
                     style={{
                       aspectRatio: '3/4',
                       border: '1.5px solid rgba(173,101,46,0.25)',
+                      willChange: 'transform',
                     }}
                   >
                     <img
@@ -113,6 +114,7 @@ export default function FoodGallery() {
                       width={600}
                       height={800}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      style={{ willChange: 'transform' }}
                     />
                     <div
                       className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -129,7 +131,7 @@ export default function FoodGallery() {
                   >
                     {item.name}
                   </p>
-                  <div className="mt-1 h-px w-0 group-hover:w-7 bg-[#AD652E] mx-auto rounded-full transition-all duration-300" />
+                  <div className="mt-1 h-px w-7 bg-[#AD652E] mx-auto rounded-full transition-transform duration-300 scale-x-0 group-hover:scale-x-100 origin-center" />
                 </div>
               </CarouselItem>
             ))}
@@ -141,7 +143,7 @@ export default function FoodGallery() {
       <button
         onClick={() => api?.scrollNext()}
         aria-label="הבא"
-        className="absolute left-0 top-[38%] -translate-y-1/2 translate-x-1 z-10 w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center bg-[#1C0A02] hover:bg-[#AD652E] border border-[#AD652E]/40 shadow-lg transition-all duration-300 hover:scale-110 active:scale-95"
+        className="absolute left-0 top-[38%] -translate-y-1/2 translate-x-1 z-10 w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center bg-[#1C0A02] hover:bg-[#AD652E] border border-[#AD652E]/40 shadow-lg transition-[background-color,transform,box-shadow] duration-300 hover:scale-110 active:scale-95"
       >
         <ChevronLeft className="w-5 h-5 text-[#E4E1D8]" />
       </button>

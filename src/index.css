@@ -132,3 +132,14 @@ h1, h2, h3 {
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
 }
+
+/* ── Performance: GPU-promote elements that animate on scroll ──────────── */
+[data-framer-motion-will-change] {
+  will-change: transform, opacity;
+}
+
+/* Ensure smooth image rendering during transforms */
+img {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
